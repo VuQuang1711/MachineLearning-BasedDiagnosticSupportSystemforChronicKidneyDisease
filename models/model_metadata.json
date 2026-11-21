@@ -1,0 +1,70 @@
+{
+  "project_id": "BT04",
+  "project_name": "Chronic Kidney Disease Diagnosis (CKD)",
+  "dataset_source": "Kaggle / UCI Machine Learning Repository (akshayksingh/kidney-disease-dataset)",
+  "total_samples": 400,
+  "train_samples": 320,
+  "test_samples": 80,
+  "num_features_raw": 24,
+  "num_features_numerical": 11,
+  "num_features_categorical": 13,
+  "num_features_encoded": 35,
+  "data_audit": {
+    "duplicated_rows": 0,
+    "constant_columns": 0,
+    "dropped_id_columns": ["id"],
+    "missing_cells_cleaned": 1012,
+    "total_feature_cells": 9600,
+    "missing_rate_pct": 10.54,
+    "columns_with_missing": 24
+  },
+  "best_model_algorithm": "RandomForestClassifier",
+  "best_hyperparameters": {
+    "criterion": "entropy",
+    "n_estimators": 100,
+    "max_depth": 5,
+    "min_samples_split": 6,
+    "min_samples_leaf": 3,
+    "random_state": 42
+  },
+  "metrics_on_test_set": {
+    "Accuracy": 0.9625,
+    "Precision": 0.9796,
+    "Recall": 0.9600,
+    "F1_Score": 0.9697,
+    "ROC_AUC": 0.9980,
+    "confusion_matrix": {
+      "TP": 48,
+      "TN": 29,
+      "FP": 1,
+      "FN": 2
+    }
+  },
+  "cross_validation": {
+    "folds": 5,
+    "strategy": "StratifiedKFold",
+    "mean_cv_recall": 0.9850,
+    "std_cv_recall": 0.0122,
+    "mean_cv_accuracy": 0.9781,
+    "std_cv_accuracy": 0.0077,
+    "mean_cv_roc_auc": 0.9988,
+    "std_cv_roc_auc": 0.0012
+  },
+  "top_5_feature_importance_pct": {
+    "hemo": 22.45,
+    "pcv": 20.22,
+    "sc": 9.51,
+    "htn_yes": 7.98,
+    "rc": 7.75
+  },
+  "pca_analysis": {
+    "components_for_95_percent_variance": 19,
+    "cumulative_variance_at_19_pct": 95.26,
+    "pc1_variance_pct": 31.18,
+    "pc2_variance_pct": 10.69,
+    "total_components": 35
+  },
+  "unit_tests_total": 17,
+  "exported_pipeline_path": "models/kidney_disease_pipeline.joblib",
+  "updated_at": "2026-11-21T09:25:00+07:00"
+}

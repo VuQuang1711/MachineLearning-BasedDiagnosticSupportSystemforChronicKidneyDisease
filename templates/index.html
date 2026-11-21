@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUIT HOSPITAL — Bệnh Viện Công Thương TP.HCM | Hệ Thống Quản Lý Bệnh Viện & Chẩn Đoán Bệnh Thận (CKD)</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/static/images/huit_logo.png">
+  <!-- Thư viện biểu đồ Chart.js (Chạy offline từ thư mục static/js) -->
+  <script src="/static/js/chart.min.js"></script>
+</head>
+<body>
+  <div class="huit-app-layout">
+    <!-- ======================================================== -->
+    <!-- SIDEBAR BÊN TRÁI (DARK NAVY THEME CHUẨN HUIT HOSPITAL)   -->
+    <!-- ======================================================== -->
+    <aside class="huit-sidebar">
+      <!-- Brand Header với Logo HUIT Tròn -->
+      <div class="sidebar-brand">
+        <div class="brand-logo-wrap">
+          <img src="/static/images/huit_logo.png" alt="HUIT Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-text">
+          <h2>HUIT HOSPITAL</h2>
+          <span>Bệnh Viện Công Thương TP.HCM</span>
+        </div>
+      </div>
+
+      <!-- User Profile Badge: Bác sĩ Vũ Thế Quang -->
+      <div class="sidebar-user-card">
+        <div class="user-avatar">
+          <span>V</span>
+          <span class="user-online-indicator"></span>
+        </div>
+        <div class="user-info">
+          <h4>BS. Vũ Thế Quang</h4>
+          <span class="user-role-badge">Khoa Nội Thận - Lọc Máu</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu Nghiệp Vụ Bệnh Viện -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">QUẢN LÝ BỆNH VIỆN</div>
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <a href="#overview">
+              <span class="nav-icon">📊</span>
+              <span class="nav-text">Tổng Quan & Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#patient-queue-section">
+              <span class="nav-icon">👥</span>
+              <span class="nav-text">Danh Sách Bệnh Nhân</span>
+              <span class="nav-badge-count">5 ca</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#diagnosis-section">
+              <span class="nav-icon">🩺</span>
+              <span class="nav-text">Khám & AI Chẩn Đoán</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#benchmark-comparison-section">
+              <span class="nav-icon">⚖️</span>
+              <span class="nav-text">Đối Chiếu 24 Chỉ Số Chuẩn</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#full-dataset-section">
+              <span class="nav-icon">📂</span>
+              <span class="nav-text">Kho Dữ Liệu 400 Bệnh Án</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#why-result-section">
+              <span class="nav-icon">🧠</span>
+              <span class="nav-text">Tại Sao Có Kết Quả Này?</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">TRỰC QUAN HÓA & BIỂU ĐỒ</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#radar-analytics-anchor">
+              <span class="nav-icon">🎯</span>
+              <span class="nav-text">Biểu Đồ Radar Sinh Hóa</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics-hub">
+              <span class="nav-icon">📉</span>
+              <span class="nav-text">So Sánh 6 Mô Hình ML</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics-hub">
+              <span class="nav-icon">🔬</span>
+              <span class="nav-text">Thư Viện ROC & PCA</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">CẬN LÂM SÀNG & ĐIỀU TRỊ</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#blood-tests">
+              <span class="nav-icon">🧪</span>
+              <span class="nav-text">Sinh Hóa Máu (11 chỉ số)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#urine-tests">
+              <span class="nav-icon">🧫</span>
+              <span class="nav-text">Phân Tích Nước Tiểu (7 chỉ số)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#medical-history">
+              <span class="nav-icon">📋</span>
+              <span class="nav-text">Tiền Sử & Triệu Chứng</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#prescription-section">
+              <span class="nav-icon">💊</span>
+              <span class="nav-text">Đơn Thuốc & Phác Đồ</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">MÁY HỌC & BÁO CÁO</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#xai-section">
+              <span class="nav-icon">🧠</span>
+              <span class="nav-text">AI Giải Trình (Clinical XAI)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#metrics-report">
+              <span class="nav-icon">📈</span>
+              <span class="nav-text">Bảng Điểm 6 Thuật Toán</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" id="sidebarBtnPrint">
+              <span class="nav-icon">🖨️</span>
+              <span class="nav-text">In Hồ Sơ & Bệnh Án</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="system-status-indicator">
+          <span class="status-pulse-dot"></span>
+          <span>Máy chủ AI: Trực tuyến (v2.4)</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======================================================== -->
+    <!-- MAIN WRAPPER (HEADER + NỘI DUNG CHÍNH)                  -->
+    <!-- ======================================================== -->
+    <div class="huit-main-wrapper">
+      <!-- TOP NAVIGATION BAR (CHUẨN CỔNG HUIT) -->
+      <header class="huit-topbar">
+        <div class="topbar-address-strip">
+          <div class="address-left">
+            <img src="/static/images/huit_logo.png" alt="HUIT Mini Logo" class="topbar-mini-logo">
+            <span><strong>Bệnh Viện Đại Học Công Thương TP. Hồ Chí Minh (HUIT Hospital)</strong> &bull; 140 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP.HCM &bull; Cấp cứu: (028) 3816 1673 &bull; info@huit.edu.vn</span>
+          </div>
+          <div class="topbar-quick-links">
+            <a href="https://huit.edu.vn" target="_blank">Cổng HUIT</a>
+            <a href="#patient-queue-section">Tiếp Nhận BN</a>
+            <a href="#benchmark-comparison-section">Đối Chiếu Chuẩn</a>
+            <a href="#analytics-hub">Trung Tâm Biểu Đồ</a>
+          </div>
+        </div>
+
+        <div class="topbar-search-strip">
+          <div class="search-input-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Tìm nhanh bệnh nhân (Mã BN, Họ tên, BHYT, Chỉ số SC, Hemo)..." id="globalSearch">
+            <span class="shortcut-key">Ctrl K</span>
+          </div>
+
+          <div class="topbar-user-actions">
+            <button class="action-circle-btn" id="themeToggleBtn" title="Chuyển chế độ sáng/tối">🌙</button>
+            <div class="action-role-pill">
+              <span class="status-dot-green"></span>
+              <span>BS. Vũ Thế Quang (Đang trực)</span>
+            </div>
+            <button class="btn-topbar-print" id="topbarBtnPrint" title="In phiếu kết quả khám">
+              <span>🖨️</span> In Phiếu Khám
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="huit-content-area" id="overview">
+        <!-- BREADCRUMB & HEADER -->
+        <div class="page-header-row">
+          <div class="header-titles">
+            <div class="header-pills">
+              <span class="pill-blue-solid">HỆ THỐNG QUẢN LÝ BỆNH VIỆN (HIS)</span>
+              <span class="pill-blue-outline">HỖ TRỢ CHẨN ĐOÁN LÂM SÀNG BỆNH THẬN (CDSS - KDIGO 2024)</span>
+              <span class="pill-cyan-badge">⚖️ ĐỐI CHIẾU KHOẢNG CHUẨN SINH LÝ</span>
+            </div>
+            <h1 class="main-page-title">Bảng Điều Khiển Khám Bệnh & Chẩn Đoán Bệnh Thận Mãn Tính</h1>
+            <p class="main-page-desc">
+              Quản lý danh sách tiếp nhận bệnh nhân, tự động tính toán mức lọc cầu thận eGFR (MDRD), đối chiếu 24 chỉ số lâm sàng với khoảng chuẩn sinh lý người khỏe mạnh và dự báo nguy cơ bằng Trí tuệ Nhân tạo (Machine Learning Recall 98.0%).
+            </p>
+          </div>
+
+          <div class="header-action-buttons">
+            <button type="button" class="btn-huit-outline" id="btnOpenPrint">
+              <span>🖨️</span> In Bệnh Án Điện Tử
+            </button>
+            <button type="button" class="btn-huit-primary" id="btnFillSampleTop">
+              <span>⚡</span> Nạp Ca Mẫu Nguy Cơ Cao
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 THẺ KPI METRIC CARDS (THIẾT KẾ GIỐNG BẢNG ĐIỂM HUIT PHOTO) -->
+        <div class="kpi-cards-grid">
+          <!-- Card 1: Xác Suất Nguy Cơ CKD -->
+          <div class="kpi-card" id="kpiCardRisk">
+            <div class="kpi-title">XÁC SUẤT NGUY CƠ CKD</div>
+            <div class="kpi-value-row">
+              <span class="kpi-large-num" id="kpiProbVal">0,0%</span>
+            </div>
+            <div class="kpi-subtitle" id="kpiProbSub">Thang đo mô hình Ensemble Random Forest</div>
+          </div>
+
+          <!-- Card 2: Mức Lọc Cầu Thận eGFR -->
+          <div class="kpi-card">
+            <div class="kpi-title">MỨC LỌC CẦU THẬN (eGFR)</div>
+            <div class="kpi-value-row">
+              <span class="kpi-large-num" id="kpiEgfrVal">--</span>
+              <span class="kpi-unit">/ 120 mL/phút</span>
+            </div>
+            <div class="kpi-subtitle" id="kpiEgfrSub">Đo lường chức năng lọc cầu thận theo MDRD</div>
+          </div>
+
+          <!-- Card 3: Xếp Loại Nguy Cơ / Tổng Ca Tiếp Nhận -->
+          <div class="kpi-card">
+            <div class="kpi-title">XẾP LOẠI LÂM SÀNG</div>
+            <div class="kpi-value-row">
+              <span class="kpi-large-num-text text-normal" id="kpiRankVal">Chờ Khám</span>
+            </div>
+            <div class="kpi-subtitle">Quy chế chẩn đoán HUIT Hospital (KDIGO)</div>
+          </div>
+
+          <!-- Card 4: Tình Trạng Tiếp Nhận / Hoạt Động Khoa -->
+          <div class="kpi-card">
+            <div class="kpi-title">TÌNH TRẠNG KHOA NỘI THẬN</div>
+            <div class="kpi-badge-wrap">
+              <span class="status-badge-pill pill-neutral" id="kpiStatusPill">✓ TIẾP NHẬN 5 BN</span>
+            </div>
+            <div class="kpi-subtitle">Công suất giường: 38/45 giường (84.4%)</div>
+          </div>
+        </div>
+
+        <!-- INFO NOTICE BANNER (MATCHING THE INFO BOX IN USER PHOTO) -->
+        <div class="huit-info-banner">
+          <div class="info-icon">ℹ️</div>
+          <div class="info-text">
+            <strong>Quy chuẩn chẩn đoán & phân tầng nguy cơ Bệnh Viện HUIT:</strong> Dự báo tổng hợp dựa trên 24 thuộc tính lâm sàng kết hợp mô hình Ensemble Random Forest (Độ nhạy Recall 98.0%). Tam giác vàng chỉ số tiên lượng: Creatinine huyết thanh (sc) + Hemoglobin (hemo) + Albumin nước tiểu (al). Phân độ suy thận theo eGFR (MDRD): G1 (&ge;90: Bình thường), G2 (60-89: Tổn thương nhẹ), G3 (30-59: Suy giảm vừa), G4 (15-29: Suy thận nặng), G5 (&lt;15: Suy thận mạn giai đoạn cuối / Chỉ định lọc máu chu kỳ).
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MỤC 1: BẢNG QUẢN LÝ TIẾP NHẬN BỆNH NHÂN TRONG NGÀY       -->
+        <!-- ======================================================== -->
+        <div class="patient-directory-card" id="patient-queue-section">
+          <div class="card-section-header">
+            <div class="header-icon-title">
+              <span class="section-icon">👥</span>
+              <div>
+                <h3>Danh Sách Tiếp Nhận Bệnh Nhân Trong Ngày — Khoa Nội Thận</h3>
+                <p>Chọn bệnh nhân từ danh sách tiếp nhận để nạp tự động thông tin hành chính, 24 chỉ số lâm sàng & đối chiếu chuẩn</p>
+              </div>
+            </div>
+            <div class="patient-filter-actions">
+              <div class="search-patient-inline">
+                <input type="text" id="patientFilterInput" placeholder="Tìm theo tên BN / Mã hồ sơ...">
+              </div>
+              <button type="button" class="btn-refresh-patients" id="btnRefreshPatients" title="Tải lại danh sách">🔄 Làm Mới</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="patient-queue-table" id="patientQueueTable">
+              <thead>
+                <tr>
+                  <th>MÃ BN (MRN)</th>
+                  <th>HỌ VÀ TÊN</th>
+                  <th>TUỔI / GIỚI</th>
+                  <th>SỐ THẺ BHYT</th>
+                  <th>PHÒNG / GIƯỜNG</th>
+                  <th>TRIỆU CHỨNG BAN ĐẦU</th>
+                  <th>MỨC LỌC eGFR</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody id="patientQueueTableBody">
+                <!-- Sẽ được render tự động qua JavaScript từ danh sách bệnh nhân mẫu -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MỤC 2: HỒ SƠ HÀNH CHÍNH & KHÁM LÂM SÀNG 24 CHỈ SỐ       -->
+        <!-- ======================================================== -->
+        <div class="workspace-grid" id="diagnosis-section">
+          <!-- CỘT TRÁI: FORM NHẬP LIỆU & HÀNH CHÍNH -->
+          <div class="form-container-card">
+            <!-- Thông tin hành chính bệnh nhân đang khám -->
+            <div class="patient-admin-header-card">
+              <div class="admin-header-top">
+                <div class="admin-badge-pill">
+                  <span>HỒ SƠ BỆNH ÁN ĐIỆN TỬ (EMR)</span>
+                </div>
+                <div class="admin-mrn">
+                  <span>Mã BN:</span> <strong id="displayPatientMRN">BN-2026-0841</strong>
+                </div>
+              </div>
+              <div class="admin-fields-grid">
+                <div class="admin-field">
+                  <label>Họ và Tên:</label>
+                  <input type="text" id="patientName" value="Trần Văn Hùng" placeholder="Họ và tên bệnh nhân">
+                </div>
+                <div class="admin-field">
+                  <label>Giới Tính:</label>
+                  <select id="patientGender">
+                    <option value="male" selected>Nam</option>
+                    <option value="female">Nữ</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label>Số Thẻ BHYT:</label>
+                  <input type="text" id="patientBHYT" value="GD 4 79 0123456789" placeholder="Số BHYT">
+                </div>
+                <div class="admin-field">
+                  <label>Phòng / Giường:</label>
+                  <input type="text" id="patientBed" value="Phòng 302 - Giường 05" placeholder="Phòng/Giường">
+                </div>
+                <div class="admin-field">
+                  <label>Địa Chỉ / SĐT:</label>
+                  <input type="text" id="patientContact" value="Tân Phú, TP.HCM &bull; 0918.xxx.789" placeholder="Địa chỉ/SĐT">
+                </div>
+                <div class="admin-field">
+                  <label>Bác Sĩ Phụ Trách:</label>
+                  <input type="text" id="patientDoctor" value="BS. Vũ Thế Quang" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-section-header" style="margin-top: 18px;">
+              <div class="header-icon-title">
+                <span class="section-icon">📝</span>
+                <div>
+                  <h3>24 Chỉ Số Cận Lâm Sàng & Xét Nghiệm</h3>
+                  <p>Nhập số liệu xét nghiệm máu, nước tiểu (kèm khoảng chuẩn sinh lý bình thường)</p>
+                </div>
+              </div>
+              <div class="quick-sample-buttons">
+                <button type="button" class="btn-small-sample sample-ckd" id="btnFillSampleQuick">Ca Bệnh CKD Nặng</button>
+                <button type="button" class="btn-small-sample sample-healthy" id="btnFillHealthyQuick">Ca Khỏe Mạnh (Not CKD)</button>
+              </div>
+            </div>
+
+            <form id="ckdForm">
+              <!-- NHÓM 1: 11 CHỈ SỐ SINH HÓA MÁU -->
+              <div class="form-subgroup" id="blood-tests">
+                <h4 class="subgroup-title">
+                  <span class="badge-num">1</span> 11 Chỉ Số Sinh Hóa Máu & Huyết Học
+                </h4>
+                <div class="fields-grid">
+                  <div class="field-item">
+                    <label for="age">Tuổi (age - năm):</label>
+                    <input type="number" id="age" name="age" value="62" min="1" max="120" required>
+                    <span class="field-ref-hint">Chuẩn: 18 - 60 tuổi</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="bp">Huyết áp (bp - mmHg):</label>
+                    <input type="number" id="bp" name="bp" value="85" min="40" max="250" required>
+                    <span class="field-ref-hint">Chuẩn: 60 - 80 mmHg</span>
+                  </div>
+                  <div class="field-item highlight-field">
+                    <label for="sc">Creatinine máu (sc - mg/dL): <span class="gold-star">★ Chỉ số vàng</span></label>
+                    <input type="number" id="sc" name="sc" step="0.1" value="3.2" min="0.1" max="80.0" required>
+                    <span class="field-ref-hint hint-gold">Chuẩn: 0.6 - 1.2 mg/dL</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="bu">Urê máu (bu - mg/dL):</label>
+                    <input type="number" id="bu" name="bu" step="0.1" value="58.0" min="1.0" max="400.0" required>
+                    <span class="field-ref-hint">Chuẩn: 10.0 - 45.0 mg/dL</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="bgr">Đường huyết đói (bgr - mg/dL):</label>
+                    <input type="number" id="bgr" name="bgr" step="0.1" value="155.0" min="20.0" max="500.0">
+                    <span class="field-ref-hint">Chuẩn: 70.0 - 110.0 mg/dL</span>
+                  </div>
+                  <div class="field-item highlight-field">
+                    <label for="hemo">Huyết sắc tố (hemo - g/dL): <span class="gold-star">★ Chỉ số vàng</span></label>
+                    <input type="number" id="hemo" name="hemo" step="0.1" value="9.5" min="1.0" max="25.0" required>
+                    <span class="field-ref-hint hint-gold">Chuẩn: 12.0 - 16.5 g/dL</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="pcv">Dung tích hồng cầu (pcv - %):</label>
+                    <input type="number" id="pcv" name="pcv" value="30" min="5" max="65">
+                    <span class="field-ref-hint">Chuẩn: 36.0 - 48.0 %</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="sod">Natri máu (sod - mEq/L):</label>
+                    <input type="number" id="sod" name="sod" step="0.1" value="135.0" min="50.0" max="180.0">
+                    <span class="field-ref-hint">Chuẩn: 135.0 - 145.0 mEq/L</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="pot">Kali máu (pot - mEq/L):</label>
+                    <input type="number" id="pot" name="pot" step="0.1" value="4.8" min="1.0" max="50.0">
+                    <span class="field-ref-hint">Chuẩn: 3.5 - 5.0 mEq/L</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="wc">Bạch cầu (wc - cells/μL):</label>
+                    <input type="number" id="wc" name="wc" value="9200" min="1000" max="30000">
+                    <span class="field-ref-hint">Chuẩn: 4,000 - 10,000 cells/μL</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="rc">Hồng cầu (rc - triệu/μL):</label>
+                    <input type="number" id="rc" name="rc" step="0.1" value="3.4" min="1.0" max="10.0">
+                    <span class="field-ref-hint">Chuẩn: 4.2 - 5.8 tr/μL</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NHÓM 2: 7 CHỈ SỐ NƯỚC TIỂU -->
+              <div class="form-subgroup" id="urine-tests">
+                <h4 class="subgroup-title">
+                  <span class="badge-num">2</span> 7 Chỉ Số Phân Tích Nước Tiểu
+                </h4>
+                <div class="fields-grid">
+                  <div class="field-item">
+                    <label for="sg">Tỷ trọng nước tiểu (sg):</label>
+                    <select id="sg" name="sg">
+                      <option value="1.010" selected>1.010 (Cô đặc kém)</option>
+                      <option value="1.005">1.005</option>
+                      <option value="1.015">1.015</option>
+                      <option value="1.020">1.020 (Bình thường)</option>
+                      <option value="1.025">1.025</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: 1.015 - 1.025</span>
+                  </div>
+                  <div class="field-item highlight-field">
+                    <label for="al">Albumin niệu (al): <span class="gold-star">★ Chỉ số vàng</span></label>
+                    <select id="al" name="al">
+                      <option value="3.0" selected>3.0 (+++ Tổn thương nặng)</option>
+                      <option value="0.0">0.0 (Âm tính / Bình thường)</option>
+                      <option value="1.0">1.0 (+)</option>
+                      <option value="2.0">2.0 (++)</option>
+                      <option value="4.0">4.0 (++++)</option>
+                      <option value="5.0">5.0 (+++++)</option>
+                    </select>
+                    <span class="field-ref-hint hint-gold">Chuẩn: 0.0 (Âm tính)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="su">Đường niệu (su):</label>
+                    <select id="su" name="su">
+                      <option value="1.0" selected>1.0 (+)</option>
+                      <option value="0.0">0.0 (Âm tính)</option>
+                      <option value="2.0">2.0</option>
+                      <option value="3.0">3.0</option>
+                      <option value="4.0">4.0</option>
+                      <option value="5.0">5.0</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: 0.0 (Âm tính)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="rbc">Hồng cầu niệu (rbc):</label>
+                    <select id="rbc" name="rbc">
+                      <option value="abnormal" selected>Bất thường (abnormal)</option>
+                      <option value="normal">Bình thường (normal)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: normal (Âm tính)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="pc">Tế bào mủ (pc):</label>
+                    <select id="pc" name="pc">
+                      <option value="abnormal" selected>Bất thường (abnormal)</option>
+                      <option value="normal">Bình thường (normal)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: normal (Âm tính)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="pcc">Đám tế bào mủ (pcc):</label>
+                    <select id="pcc" name="pcc">
+                      <option value="notpresent" selected>Không có (notpresent)</option>
+                      <option value="present">Có đám mủ (present)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: notpresent (Không có)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="ba">Vi khuẩn niệu (ba):</label>
+                    <select id="ba" name="ba">
+                      <option value="notpresent" selected>Không có vi khuẩn (notpresent)</option>
+                      <option value="present">Có vi khuẩn (present)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: notpresent (Không có)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NHÓM 3: 6 THUỘC TÍNH TIỀN SỬ BỆNH & TRIỆU CHỨNG -->
+              <div class="form-subgroup" id="medical-history">
+                <h4 class="subgroup-title">
+                  <span class="badge-num">3</span> 6 Tiền Sử Bệnh Lý & Triệu Chứng Thực Thể
+                </h4>
+                <div class="fields-grid">
+                  <div class="field-item">
+                    <label for="htn">Tăng huyết áp (htn):</label>
+                    <select id="htn" name="htn">
+                      <option value="yes" selected>Có tiền sử tăng HA (yes)</option>
+                      <option value="no">Không (no)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: no (Không)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="dm">Đái tháo đường (dm):</label>
+                    <select id="dm" name="dm">
+                      <option value="yes" selected>Có đái tháo đường (yes)</option>
+                      <option value="no">Không (no)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: no (Không)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="cad">Bệnh mạch vành tim (cad):</label>
+                    <select id="cad" name="cad">
+                      <option value="no" selected>Không (no)</option>
+                      <option value="yes">Có bệnh mạch vành (yes)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: no (Không)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="appet">Cảm giác thèm ăn (appet):</label>
+                    <select id="appet" name="appet">
+                      <option value="poor" selected>Chán ăn / Kém (poor)</option>
+                      <option value="good">Ăn ngon miệng (good)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: good (Ngon miệng)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="pe">Phù mu bàn chân (pe):</label>
+                    <select id="pe" name="pe">
+                      <option value="yes" selected>Có phù nề (yes)</option>
+                      <option value="no">Không phù (no)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: no (Không phù)</span>
+                  </div>
+                  <div class="field-item">
+                    <label for="ane">Hội chứng thiếu máu (ane):</label>
+                    <select id="ane" name="ane">
+                      <option value="yes" selected>Có thiếu máu (yes)</option>
+                      <option value="no">Không (no)</option>
+                    </select>
+                    <span class="field-ref-hint">Chuẩn: no (Không thiếu máu)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ACTIONS BUTTONS -->
+              <div class="form-actions-row">
+                <button type="submit" class="btn-submit-diagnosis" id="btnSubmit">
+                  <span>⚡</span> TIẾN HÀNH PHÂN TÍCH & CHẨN ĐOÁN (AI DIAGNOSIS)
+                </button>
+                <button type="reset" class="btn-reset-form" id="btnReset">
+                  <span>↺</span> Làm Mới Dữ Liệu
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- CỘT PHẢI: KẾT QUẢ CHẨN ĐOÁN & AI GIẢI TRÌNH & BIỂU ĐỒ RADAR -->
+          <div class="result-container-card" id="xai-section">
+            <div class="card-section-header">
+              <div class="header-icon-title">
+                <span class="section-icon">🩺</span>
+                <div>
+                  <h3>Kết Quả Chẩn Đoán & AI Giải Trình Lâm Sàng</h3>
+                  <p>Phân tích mức độ rủi ro theo thời gian thực (Inference API)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trạng thái chờ -->
+            <div id="emptyResultBox" class="empty-result-state">
+              <div class="hospital-stethoscope-icon">🩺</div>
+              <h4>Hệ Thống Chờ Dữ Liệu Khám Bệnh</h4>
+              <p>Bác sĩ có thể chọn 1 bệnh nhân từ danh sách tiếp nhận phía trên hoặc điền các chỉ số rồi bấm <strong>"Tiến Hành Phân Tích & Chẩn Đoán"</strong> để hệ thống suy luận và vẽ biểu đồ.</p>
+            </div>
+
+            <!-- Khối kết quả khi đã có dữ liệu -->
+            <div id="activeResultBox" class="active-result-box hidden">
+              <!-- Result Status Header -->
+              <div id="mainResultBanner" class="result-banner banner-danger">
+                <div class="banner-icon-col" id="bannerIcon">⚠️</div>
+                <div class="banner-text-col">
+                  <span class="banner-sub">KẾT LUẬN HỘI CHẨN LÂM SÀNG:</span>
+                  <h2 id="bannerDiagnosisTitle">BỆNH THẬN MÃN TÍNH (CKD)</h2>
+                </div>
+              </div>
+
+              <!-- ======================================================== -->
+              <!-- 🌟 BẮT MẮT: BỘ ĐÔI BIỂU ĐỒ ĐỒNG HỒ GAUGE & RADAR SINH HÓA -->
+              <!-- ======================================================== -->
+              <div class="result-visual-charts-row" id="radar-analytics-anchor">
+                <!-- Đồng hồ đo nguy cơ Gauge Chart -->
+                <div class="visual-chart-card gauge-subcard">
+                  <div class="chart-header-compact">
+                    <span class="chart-dot dot-red"></span>
+                    <h5>ĐỒNG HỒ ĐO NGUY CƠ CKD</h5>
+                  </div>
+                  <div class="gauge-chart-wrapper">
+                    <canvas id="riskGaugeCanvas"></canvas>
+                    <div class="gauge-center-label">
+                      <span class="gauge-pct-num" id="gaugePctText">89.2%</span>
+                      <span class="gauge-status-badge" id="gaugeStatusText">Nguy Cơ Cao</span>
+                    </div>
+                  </div>
+                  <div class="gauge-footer-note">
+                    <span>Mô hình: Ensemble Random Forest</span>
+                  </div>
+                </div>
+
+                <!-- Biểu đồ Radar đa chiều sinh hóa -->
+                <div class="visual-chart-card radar-subcard">
+                  <div class="chart-header-compact">
+                    <span class="chart-dot dot-blue"></span>
+                    <h5>RADAR TAM GIÁC VÀNG & SINH HÓA</h5>
+                  </div>
+                  <div class="radar-chart-wrapper">
+                    <canvas id="biomarkerRadarCanvas"></canvas>
+                  </div>
+                  <div class="radar-legend-strip">
+                    <span class="legend-chip chip-patient">● Bệnh nhân</span>
+                    <span class="legend-chip chip-normal">● Chuẩn an toàn</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Clinical Recommendation Card -->
+              <div class="recommendation-card">
+                <div class="rec-header">
+                  <span class="rec-icon">📋</span>
+                  <strong>Khuyến Nghị Xử Trí Y Tế Cấp Khoa:</strong>
+                </div>
+                <p id="recommendationBody" class="rec-body">
+                  Cần chuyển tuyến bác sĩ chuyên khoa thận - tiết niệu ngay lập tức để làm xét nghiệm sinh thiết/chức năng thận chuyên sâu.
+                </p>
+              </div>
+
+              <!-- ======================================================== -->
+              <!-- 🧠 TẠI SAO CÓ KẾT QUẢ NÀY? (CLINICAL XAI REASONING)      -->
+              <!-- ======================================================== -->
+              <div class="xai-explain-widget" id="why-result-section">
+                <div class="xai-widget-header">
+                  <div class="xai-widget-title">
+                    <span>🧠</span> TẠI SAO MÔ HÌNH DỰ ĐOÁN KẾT QUẢ NHƯ VẬY? (CLINICAL XAI)
+                  </div>
+                  <span class="xai-standard-pill">KDIGO 2024 & MDRD Clinical Engine</span>
+                </div>
+
+                <!-- 1. Luận điểm tóm tắt của mô hình AI -->
+                <div class="xai-headline-box" id="xaiHeadlineBox">
+                  <span class="xai-headline-icon">💡</span>
+                  <div class="xai-headline-content">
+                    <strong>Kết Luận Hội Chẩn AI:</strong>
+                    <p id="xaiHeadlineText">Đang phân tích dữ liệu...</p>
+                  </div>
+                </div>
+
+                <!-- 2. Biểu đồ thanh đo trọng số tác động của từng chỉ số (Feature Impact) -->
+                <div class="xai-impact-block">
+                  <div class="xai-sub-title">
+                    <span>📊</span> Trọng Số Đóng Góp Của Từng Chỉ Số Lâm Sàng (Feature Impact Weights)
+                  </div>
+                  <p class="xai-sub-desc">Thanh đỏ thể hiện yếu tố đẩy xác suất về phía Bệnh Thận (Risk Factors); thanh xanh thể hiện yếu tố bảo vệ / an toàn (Protective Factors):</p>
+                  <div class="xai-impact-bars-container" id="xaiImpactBarsContainer">
+                    <!-- Được sinh tự động bởi JavaScript -->
+                  </div>
+                </div>
+
+                <!-- 3. Quy trình suy luận lâm sàng 3 cấp độ theo KDIGO -->
+                <div class="kdigo-decision-pathway-card">
+                  <div class="xai-sub-title">
+                    <span>⚖️</span> Quy Trình Suy Luận Lâm Sàng 3 Trụ Cột (KDIGO Diagnostic Pathway)
+                  </div>
+                  <div class="kdigo-pillars-grid">
+                    <div class="kdigo-pillar-item" id="pillarGlomerular">
+                      <div class="pillar-icon">🔬</div>
+                      <h6>1. Màng Lọc Cầu Thận</h6>
+                      <div class="pillar-status" id="pillarGlomerularStatus">Đang kiểm tra...</div>
+                      <p>Khảo sát Albumin niệu (al) & Hồng cầu niệu (rbc) xác định tổn thương mao mạch thận thực thể.</p>
+                    </div>
+
+                    <div class="kdigo-pillar-item" id="pillarFiltration">
+                      <div class="pillar-icon">💧</div>
+                      <h6>2. Tốc Độ Lọc Cầu Thận (eGFR)</h6>
+                      <div class="pillar-status" id="pillarFiltrationStatus">Đang kiểm tra...</div>
+                      <p>Đánh giá nồng độ Creatinine (sc) & phân độ suy thận G1 - G5 theo phương trình chuẩn MDRD.</p>
+                    </div>
+
+                    <div class="kdigo-pillar-item" id="pillarSystemic">
+                      <div class="pillar-icon">🫀</div>
+                      <h6>3. Biến Chứng Toàn Thân</h6>
+                      <div class="pillar-status" id="pillarSystemicStatus">Đang kiểm tra...</div>
+                      <p>Đánh giá hội chứng thiếu máu do thận (hemo, ane), ứ trệ dịch (pe) và tăng huyết áp (htn).</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4. Chi tiết từng bước tính mức lọc cầu thận eGFR MDRD -->
+                <div class="mdrd-formula-card">
+                  <div class="xai-sub-title">
+                    <span>📐</span> Công Thức Toán Học Tính Mức Lọc Cầu Thận eGFR (Phương trình MDRD)
+                  </div>
+                  <div class="formula-math-display">
+                    <code>eGFR = 175 × (Serum Creatinine)<sup>-1.154</sup> × (Tuổi)<sup>-0.203</sup> × (0.742 nếu là Nữ)</code>
+                  </div>
+                  <ul class="mdrd-steps-list" id="mdrdStepsList">
+                    <!-- Các bước thế số được sinh tự động -->
+                  </ul>
+                </div>
+
+                <!-- 5. Danh sách luận chứng y khoa chứng cứ -->
+                <div class="xai-factors-block">
+                  <div class="xai-sub-title">
+                    <span>🩺</span> Chi Tiết Các Bằng Chứng Bệnh Học Y Khoa Được Mô Hình Ghi Nhận:
+                  </div>
+                  <ul class="xai-factors-list" id="xaiFactorsList">
+                    <!-- Được render tự động qua JS -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- ======================================================== -->
+              <!-- ĐƠN THUỐC & PHÁC ĐỒ ĐIỀU TRỊ KHUYẾN NGHỊ (PRESCRIPTION)  -->
+              <!-- ======================================================== -->
+              <div class="prescription-panel-card" id="prescription-section">
+                <div class="rx-header">
+                  <div class="rx-badge">💊 ĐƠN THUỐC & PHÁC ĐỒ KHUYẾN NGHỊ</div>
+                  <div class="rx-code" id="rxPrescriptionCode">Mã Toa: DT-2026-HUIT-841</div>
+                </div>
+                <div class="rx-body">
+                  <p class="rx-note-intro">Phác đồ điều trị bảo tồn chức năng thận theo hướng dẫn KDIGO 2024 & Bộ Y Tế:</p>
+                  <table class="rx-meds-table">
+                    <thead>
+                      <tr>
+                        <th>Tên Thuốc & Biệt Dược</th>
+                        <th>Hàm Lượng</th>
+                        <th>Cách Dùng & Liều Lượng</th>
+                        <th>Mục Đích Điều Trị</th>
+                      </tr>
+                    </thead>
+                    <tbody id="rxMedsList">
+                      <!-- Rendered by JS based on diagnosis -->
+                    </tbody>
+                  </table>
+
+                  <div class="rx-dietary-instructions">
+                    <h5>🥗 Lời Dặn Bác Sĩ & Chế Độ Dinh Dưỡng:</h5>
+                    <ul id="rxDietAdviceList">
+                      <li><strong>Chế độ giảm đạm:</strong> Ăn 0.6 - 0.8 g đạm/kg thể trọng/ngày (ưu tiên đạm sinh học cao từ trứng, sữa, cá nạc).</li>
+                      <li><strong>Hạn chế muối natri:</strong> Ăn nhạt hoàn toàn, dưới 2.0g muối/ngày; tuyệt đối không dùng mắm, khô, đồ hộp.</li>
+                      <li><strong>Kiểm soát lượng dịch vào:</strong> Lượng nước uống = Lượng nước tiểu 24h + 500 mL nước bay hơi qua da.</li>
+                      <li><strong>Hạn chế thực phẩm giàu Kali & Photpho:</strong> Kiêng chuối tiêu, đu đủ, nho khô, đậu đỗ, nội tạng động vật.</li>
+                      <li><strong>Tái khám:</strong> Định kỳ 2 tuần/lần hoặc đến bệnh viện ngay nếu có triệu chứng khó thở, phù tăng hoặc tiểu ít.</li>
+                    </ul>
+                  </div>
+
+                  <div class="rx-footer-actions">
+                    <button type="button" class="btn-print-rx" onclick="window.print()">
+                      <span>🖨️</span> In Toa Thuốc & Bệnh Án Này
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- ⚖️ MỤC 3: BẢNG ĐỐI CHIẾU 24 CHỈ SỐ VS KHOẢNG CHUẨN      -->
+        <!-- ======================================================== -->
+        <div class="benchmark-comparison-card" id="benchmark-comparison-section">
+          <div class="benchmark-card-header">
+            <div class="header-icon-title">
+              <span class="section-icon">⚖️</span>
+              <div>
+                <div class="benchmark-pill-tag">CLINICAL NORMAL BENCHMARKS & DEVIATION ANALYSIS</div>
+                <h3>Bảng Đối Chiếu 24 Chỉ Số Xét Nghiệm Với Khoảng Chuẩn Người Bình Thường</h3>
+                <p>So sánh từng chỉ số đầu vào của bệnh nhân với khoảng tham chiếu sinh lý chuẩn theo tiêu chuẩn KDIGO & Bộ Y Tế</p>
+              </div>
+            </div>
+
+            <!-- Filter Buttons & Summary Badges -->
+            <div class="benchmark-actions-wrap">
+              <div class="benchmark-stats-strip">
+                <span class="stat-badge stat-normal" id="statNormalBadge">✓ 14/24 Đạt Chuẩn</span>
+                <span class="stat-badge stat-abnormal" id="statAbnormalBadge">⚠️ 10/24 Lệch Chuẩn</span>
+              </div>
+              <div class="benchmark-filter-tabs">
+                <button type="button" class="btn-bench-filter active" data-benchfilter="all">Tất Cả (24 Chỉ Số)</button>
+                <button type="button" class="btn-bench-filter filter-red" data-benchfilter="abnormal">⚠️ Chỉ Số Bất Thường</button>
+                <button type="button" class="btn-bench-filter filter-green" data-benchfilter="normal">✓ Chỉ Số Đạt Chuẩn</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Benchmark Comparison Table -->
+          <div class="table-responsive">
+            <table class="benchmark-data-table" id="benchmarkDataTable">
+              <thead>
+                <tr>
+                  <th style="width: 22%;">CHỈ SỐ XÉT NGHIỆM</th>
+                  <th style="width: 14%;">GIÁ TRỊ BỆNH NHÂN</th>
+                  <th style="width: 16%;">KHOẢNG CHUẨN SINH LÝ</th>
+                  <th style="width: 12%;">ĐỘ LỆCH (%)</th>
+                  <th style="width: 16%;">THANH ĐO TRỰC QUAN (GAUGE BAR)</th>
+                  <th style="width: 10%;">TRẠNG THÁI</th>
+                  <th style="width: 10%;">ĐÁNH GIÁ</th>
+                </tr>
+              </thead>
+              <tbody id="benchmarkTableBody">
+                <!-- Sẽ được JavaScript tự động tạo và cập nhật theo thời gian thực -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 📂 MỤC 4: KHO DỮ LIỆU GỐC 400 CA BỆNH ÁN & CHỌN MẪU PHÂN TÍCH -->
+        <!-- ======================================================== -->
+        <div class="dataset-explorer-card" id="full-dataset-section">
+          <div class="card-section-header">
+            <div class="header-icon-title">
+              <span class="section-icon">📂</span>
+              <div>
+                <div class="benchmark-pill-tag">DATASET EXPLORER — BỘ MÔN KHOA HỌC DỮ LIỆU HUIT</div>
+                <h3>Kho Dữ Liệu Gốc 400 Ca Bệnh Án & Chọn Mẫu Phân Tích Thực Nghiệm</h3>
+                <p>Xem toàn bộ dữ liệu 400 bệnh nhân dưới dạng bảng tương tác. Nhấp <strong>"⚡ Chọn Phân Tích"</strong> tại bất kỳ dòng nào để nạp dữ liệu và kiểm chứng lý do mô hình dự đoán!</p>
+              </div>
+            </div>
+
+            <!-- Summary Chips -->
+            <div class="dataset-stats-strip">
+              <span class="stat-badge stat-all" id="dsTotalBadge">📊 400 Mẫu Dữ Liệu</span>
+              <span class="stat-badge stat-abnormal" id="dsCkdBadge">⚠️ 250 Ca Bệnh Thận (62.5%)</span>
+              <span class="stat-badge stat-normal" id="dsNotckdBadge">✓ 150 Ca Khỏe Mạnh (37.5%)</span>
+            </div>
+          </div>
+
+          <!-- Controls Bar: Filter, Search, Page Size -->
+          <div class="dataset-controls-bar">
+            <div class="dataset-filter-group">
+              <button type="button" class="btn-ds-filter active" data-dsfilter="all">Tất Cả (400)</button>
+              <button type="button" class="btn-ds-filter filter-red" data-dsfilter="ckd">⚠️ Ca Bệnh Thận (CKD - 250)</button>
+              <button type="button" class="btn-ds-filter filter-green" data-dsfilter="notckd">✓ Ca Khỏe Mạnh (Not CKD - 150)</button>
+            </div>
+
+            <div class="dataset-search-group">
+              <input type="text" id="datasetSearchInput" placeholder="🔍 Tìm theo ID, Tuổi, Huyết áp, Creatinine...">
+            </div>
+
+            <div class="dataset-pagesize-group">
+              <label for="datasetPageSizeSelect">Hiển thị:</label>
+              <select id="datasetPageSizeSelect">
+                <option value="15" selected>15 ca / trang</option>
+                <option value="30">30 ca / trang</option>
+                <option value="50">50 ca / trang</option>
+                <option value="100">100 ca / trang</option>
+                <option value="all">Tất cả 400 ca</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Full Dataset Table -->
+          <div class="table-responsive dataset-table-wrap">
+            <table class="dataset-grid-table" id="datasetGridTable">
+              <thead>
+                <tr>
+                  <th>MÃ (ID)</th>
+                  <th>TUỔI</th>
+                  <th>HUYẾT ÁP (bp)</th>
+                  <th>TỶ TRỌNG (sg)</th>
+                  <th>ĐẠM NIỆU (al)</th>
+                  <th>ĐƯỜNG NIỆU (su)</th>
+                  <th>HỒNG CẦU (rbc)</th>
+                  <th>ĐƯỜNG HUYẾT (bgr)</th>
+                  <th>URÊ MÁU (bu)</th>
+                  <th>CREATININE (sc)</th>
+                  <th>HUYẾT SẮC TỐ (hemo)</th>
+                  <th>TĂNG HA (htn)</th>
+                  <th>ĐÁI THÁO ĐƯỜNG (dm)</th>
+                  <th>PHÙ CHÂN (pe)</th>
+                  <th>THIẾU MÁU (ane)</th>
+                  <th>NHÃN THỰC TẾ</th>
+                  <th style="text-align: center;">THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody id="datasetTableBody">
+                <!-- Được render qua JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Controls Bar -->
+          <div class="dataset-pagination-bar">
+            <div class="pagination-info" id="datasetPaginationInfo">
+              Đang hiển thị 1 - 15 trên tổng số 400 ca bệnh án
+            </div>
+            <div class="pagination-nav-buttons">
+              <button type="button" class="btn-page-nav" id="btnDsPrevPage">◀ Trang Trước</button>
+              <span class="page-current-display" id="datasetPageCurrentDisplay">Trang 1 / 27</span>
+              <button type="button" class="btn-page-nav" id="btnDsNextPage">Trang Tiếp ▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 🌟 MỤC 5: TRUNG TÂM PHÂN TÍCH TRỰC QUAN & BIỂU ĐỒ AI      -->
+        <!-- ======================================================== -->
+        <div class="visual-analytics-hub-card" id="analytics-hub">
+          <div class="hub-header-row">
+            <div class="hub-title-col">
+              <div class="hub-pill-tag">✨ DATA SCIENCE & CLINICAL AI ANALYTICS</div>
+              <h3>📊 Trung Tâm Phân Tích Trực Quan & Hiệu Năng Mô Hình Học Máy</h3>
+              <p>Biểu đồ tương tác so sánh 6 thuật toán, độ quan trọng 10 đặc trưng hàng đầu và thư viện đồ thị học thuật chuyên sâu</p>
+            </div>
+            <div class="hub-tab-buttons">
+              <button type="button" class="hub-tab-btn active" data-tab="tab-models">📈 So Sánh 6 Mô Hình</button>
+              <button type="button" class="hub-tab-btn" data-tab="tab-features">🎯 Độ Quan Trọng Thuộc Tính</button>
+              <button type="button" class="hub-tab-btn" data-tab="tab-gallery">🔬 Thư Viện Đồ Thị Học Thuật</button>
+            </div>
+          </div>
+
+          <!-- TAB 1: SO SÁNH 6 MÔ HÌNH BẰNG BIỂU ĐỒ CỘT TƯƠNG TÁC -->
+          <div class="hub-tab-content active" id="tab-models">
+            <div class="model-chart-controls">
+              <span class="control-label">Chọn tiêu chí đánh giá y tế:</span>
+              <div class="control-btn-group">
+                <button type="button" class="metric-filter-btn active" data-metric="recall">Recall (Độ nhạy y tế ★)</button>
+                <button type="button" class="metric-filter-btn" data-metric="accuracy">Accuracy (Độ chính xác)</button>
+                <button type="button" class="metric-filter-btn" data-metric="f1">F1-Score</button>
+                <button type="button" class="metric-filter-btn" data-metric="roc_auc">ROC-AUC</button>
+              </div>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="modelsComparisonCanvas"></canvas>
+            </div>
+            <div class="chart-clinical-insight">
+              <span class="insight-icon">💡</span>
+              <span><strong>Nhận định chuyên môn y tế:</strong> Trong chẩn đoán bệnh thận mãn tính, <strong>Recall (Độ nhạy)</strong> là thước đo sống còn vì phát hiện sớm giúp ngăn ngừa tử vong và suy thận giai đoạn cuối. Random Forest đạt <strong>Recall 98.00%</strong> và <strong>ROC-AUC 0.9987</strong>, vượt trội về độ ổn định tổng thể.</span>
+            </div>
+          </div>
+
+          <!-- TAB 2: ĐỘ QUAN TRỌNG CỦA THUỘC TÍNH (FEATURE IMPORTANCE) -->
+          <div class="hub-tab-content" id="tab-features">
+            <div class="features-chart-intro">
+              <span>Top 10 chỉ số xét nghiệm có trọng số tiên lượng suy thận cao nhất theo mô hình <strong>Ensemble Random Forest (Gini Importance)</strong>:</span>
+            </div>
+            <div class="chart-canvas-container" style="height: 330px;">
+              <canvas id="featureImportanceCanvas"></canvas>
+            </div>
+            <div class="chart-clinical-insight">
+              <span class="insight-icon">🌟</span>
+              <span><strong>Tam giác vàng tiên lượng:</strong> Serum Creatinine (sc: 25.4%), Hemoglobin (hemo: 21.2%) và Albumin nước tiểu (al: 18.6%) chiếm hơn <strong>65% tổng trọng số quyết định</strong> trong chẩn đoán suy thận mạn tính!</span>
+            </div>
+          </div>
+
+          <!-- TAB 3: THƯ VIỆN ĐỒ THỊ HỌC THUẬT (CLICK ĐỂ PHÓNG TO) -->
+          <div class="hub-tab-content" id="tab-gallery">
+            <div class="academic-gallery-grid">
+              <!-- Item 1: ROC Curves -->
+              <div class="gallery-card" data-img="/static/images/roc_curves.png" data-title="Đường Cong ROC 6 Thuật Toán Phân Lớp (ROC Curves)">
+                <div class="gallery-img-wrap">
+                  <img src="/static/images/roc_curves.png" alt="Đường cong ROC">
+                  <span class="zoom-hover-badge">🔍 Phóng To Xem Đồ Thị</span>
+                </div>
+                <div class="gallery-info">
+                  <h4>Đường Cong ROC & Diện Tích AUC</h4>
+                  <p>So sánh năng lực phân tách của 6 mô hình. Random Forest (AUC = 0.9987) và SVM (AUC = 0.9993) tiệm cận góc trên bên trái lý tưởng.</p>
+                </div>
+              </div>
+
+              <!-- Item 2: Confusion Matrix -->
+              <div class="gallery-card" data-img="/static/images/confusion_matrix.png" data-title="Ma Trận Nhầm Lẫn Random Forest (Confusion Matrix - 80 Mẫu Test)">
+                <div class="gallery-img-wrap">
+                  <img src="/static/images/confusion_matrix.png" alt="Confusion Matrix">
+                  <span class="zoom-hover-badge">🔍 Phóng To Xem Đồ Thị</span>
+                </div>
+                <div class="gallery-info">
+                  <h4>Ma Trận Nhầm Lẫn (Confusion Matrix)</h4>
+                  <p>Kiểm định trên 80 mẫu test độc lập: Phát hiện chính xác 49/50 ca bệnh nhân CKD (Chỉ 1 ca False Negative duy nhất, bảo đảm an toàn y tế).</p>
+                </div>
+              </div>
+
+              <!-- Item 3: PCA Variance -->
+              <div class="gallery-card" data-img="/static/images/pca_variance.png" data-title="Phân Tích Thành Phần Chính PCA (Explained Variance Ratio)">
+                <div class="gallery-img-wrap">
+                  <img src="/static/images/pca_variance.png" alt="PCA Explained Variance">
+                  <span class="zoom-hover-badge">🔍 Phóng To Xem Đồ Thị</span>
+                </div>
+                <div class="gallery-info">
+                  <h4>Phương Sai Tích Lũy PCA (&ge;95%)</h4>
+                  <p>19 thành phần chính giải thích hơn 95% phương sai dữ liệu, chứng minh không gian 24 thuộc tính có độ tương quan mạnh và thông tin cô đặc.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MỤC 5: BẢNG ĐIỂM THỰC NGHIỆM MÔ HÌNH HỌC MÁY (MATCHING PHOTO)-->
+        <!-- ======================================================== -->
+        <div class="huit-semester-table-card" id="metrics-report">
+          <div class="semester-header-strip">
+            <div class="semester-title-row">
+              <span class="cal-icon">📅</span>
+              <span class="semester-name">Bảng Điểm Đánh Giá 6 Thuật Toán Phân Lớp (CKD Test Set - 80 Mẫu)</span>
+            </div>
+            <div class="sub-semester-info">
+              <span>Mã đề tài: BT04 &bull; Học kỳ 1 (2026-2027) &bull; Bộ môn Khoa học Dữ liệu HUIT</span>
+              <span class="pill-count">6 Thuật toán thực nghiệm</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="huit-grade-table">
+              <thead>
+                <tr>
+                  <th>MÃ THUẬT TOÁN</th>
+                  <th>TÊN THUẬT TOÁN PHÂN LỚP</th>
+                  <th>ACCURACY</th>
+                  <th>PRECISION</th>
+                  <th>RECALL (ĐỘ NHẠY Y TẾ)</th>
+                  <th>F1-SCORE</th>
+                  <th>ROC-AUC</th>
+                  <th>KẾT QUẢ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight-best-row">
+                  <td><strong>ML-RF</strong></td>
+                  <td><strong>Random Forest Classifier (Ensemble)</strong> <span class="tag-gold">Mô hình lựa chọn</span></td>
+                  <td>97.50%</td>
+                  <td>98.00%</td>
+                  <td><strong class="text-green">98.00%</strong></td>
+                  <td>98.00%</td>
+                  <td>0.9987</td>
+                  <td><span class="pill-pass">XUẤT SẮC</span></td>
+                </tr>
+                <tr>
+                  <td>ML-SVM</td>
+                  <td>Support Vector Machine (RBF Kernel)</td>
+                  <td>98.75%</td>
+                  <td>100.00%</td>
+                  <td><strong class="text-green">98.00%</strong></td>
+                  <td>98.99%</td>
+                  <td>0.9993</td>
+                  <td><span class="pill-pass">ĐẠT</span></td>
+                </tr>
+                <tr>
+                  <td>ML-LR</td>
+                  <td>Logistic Regression (Ridge L2)</td>
+                  <td>97.50%</td>
+                  <td>100.00%</td>
+                  <td>96.00%</td>
+                  <td>97.96%</td>
+                  <td>0.9987</td>
+                  <td><span class="pill-pass">ĐẠT</span></td>
+                </tr>
+                <tr>
+                  <td>ML-NB</td>
+                  <td>Gaussian Naïve Bayes</td>
+                  <td>100.00%</td>
+                  <td>100.00%</td>
+                  <td>100.00%</td>
+                  <td>100.00%</td>
+                  <td>1.0000</td>
+                  <td><span class="pill-pass">ĐẠT</span></td>
+                </tr>
+                <tr>
+                  <td>ML-DT</td>
+                  <td>Decision Tree (CART Pruned)</td>
+                  <td>95.00%</td>
+                  <td>97.92%</td>
+                  <td>94.00%</td>
+                  <td>95.92%</td>
+                  <td>0.9390</td>
+                  <td><span class="pill-pass">ĐẠT</span></td>
+                </tr>
+                <tr>
+                  <td>ML-KNN</td>
+                  <td>k-Nearest Neighbors (k=5)</td>
+                  <td>92.50%</td>
+                  <td>100.00%</td>
+                  <td>88.00%</td>
+                  <td>93.62%</td>
+                  <td>0.9887</td>
+                  <td><span class="pill-sub">CẦN CẢI THIỆN</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- LIGHTBOX MODAL PHÓNG TO HÌNH ẢNH BIỂU ĐỒ                 -->
+  <!-- ======================================================== -->
+  <div class="huit-modal-backdrop hidden" id="imageLightboxModal">
+    <div class="modal-dialog-box">
+      <div class="modal-dialog-header">
+        <h4 id="lightboxModalTitle">Chi Tiết Biểu Đồ Nghiên Cứu Y Khoa</h4>
+        <button type="button" class="modal-close-btn" id="btnCloseLightbox">&times;</button>
+      </div>
+      <div class="modal-dialog-body">
+        <img src="" alt="Zoom Plot" id="lightboxModalImg">
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PHIẾU KHÁM & BỆNH ÁN ĐIỆN TỬ DÀNH RIÊNG CHO IN ẤN PRINT -->
+  <!-- ======================================================== -->
+  <div class="printable-medical-record" id="printSection">
+    <div class="print-header">
+      <div class="print-header-left">
+        <img src="/static/images/huit_logo.png" alt="HUIT Logo" class="print-logo">
+        <div class="print-org-info">
+          <h4>BỆNH VIỆN ĐẠI HỌC CÔNG THƯƠNG TP. HỒ CHÍ MINH</h4>
+          <p>KHOA NỘI THẬN - LỌC MÁU & TIẾT NIỆU</p>
+          <small>140 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP.HCM &bull; Hotline: (028) 3816 1673</small>
+        </div>
+      </div>
+      <div class="print-header-right">
+        <div class="print-barcode">||| | ||||| |||| || |||||||</div>
+        <div class="print-doc-id" id="printMrnDisplay">Mã Hồ Sơ: BN-2026-0841</div>
+        <div class="print-date" id="printDateDisplay">Ngày lập: 06/11/2026</div>
+      </div>
+    </div>
+
+    <div class="print-title-banner">
+      <h2>PHIẾU KẾT QUẢ KHÁM & HỘI CHẨN CHẨN ĐOÁN BỆNH THẬN MÃN TÍNH</h2>
+      <p>(Hệ thống Hỗ trợ Ra Quyết định Y khoa - HUIT Hospital CDSS AI)</p>
+    </div>
+
+    <!-- Thông tin hành chính bệnh nhân in -->
+    <div class="print-section-box">
+      <h5 class="print-sec-title">I. THÔNG TIN HÀNH CHÍNH BỆNH NHÂN</h5>
+      <table class="print-info-grid">
+        <tr>
+          <td><strong>Họ và tên:</strong> <span id="printName">Trần Văn Hùng</span></td>
+          <td><strong>Năm sinh:</strong> <span id="printAge">62 tuổi (1964)</span></td>
+          <td><strong>Giới tính:</strong> <span id="printGender">Nam</span></td>
+        </tr>
+        <tr>
+          <td><strong>Số thẻ BHYT:</strong> <span id="printBHYT">GD 4 79 0123456789</span></td>
+          <td><strong>Phòng / Giường:</strong> <span id="printBed">Phòng 302 - Giường 05</span></td>
+          <td><strong>Bác sĩ khám:</strong> <span id="printDoctor">BS. Vũ Thế Quang</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Kết quả xét nghiệm in -->
+    <div class="print-section-box">
+      <h5 class="print-sec-title">II. CÁC CHỈ SỐ CẬN LÂM SÀNG QUAN TRỌNG (TAM GIÁC VÀNG TIÊN LƯỢNG)</h5>
+      <table class="print-table-full">
+        <thead>
+          <tr>
+            <th>Chỉ Số</th>
+            <th>Kết Quả Xét Nghiệm</th>
+            <th>Trị Số Bình Thường</th>
+            <th>Đánh Giá Chuyên Môn</th>
+          </tr>
+        </thead>
+        <tbody id="printLabTableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Kết luận AI & Bác sĩ -->
+    <div class="print-section-box">
+      <h5 class="print-sec-title">III. KẾT LUẬN CHẨN ĐOÁN & PHÂN ĐỘ SUY THẬN (KDIGO 2024)</h5>
+      <div class="print-diag-summary" id="printDiagSummary">
+        <p><strong>Chẩn đoán xác định:</strong> Bệnh thận mãn tính (Chronic Kidney Disease - CKD) - Giai đoạn 4 (Suy thận nặng).</p>
+        <p><strong>Mức lọc cầu thận (eGFR MDRD):</strong> 21.8 mL/phút/1.73m².</p>
+        <p><strong>Xác suất nguy cơ theo AI Random Forest:</strong> 89.2%.</p>
+      </div>
+    </div>
+
+    <!-- Toa thuốc in -->
+    <div class="print-section-box">
+      <h5 class="print-sec-title">IV. TOA THUỐC & PHÁC ĐỒ ĐIỀU TRỊ BẢO TỒN</h5>
+      <table class="print-table-full">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên Thuốc / Biệt Dược</th>
+            <th>Số Lượng</th>
+            <th>Cách Dùng & Liều Dùng</th>
+          </tr>
+        </thead>
+        <tbody id="printMedsBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Chữ ký bác sĩ -->
+    <div class="print-signatures-row">
+      <div class="sig-col">
+        <p><strong>BỆNH NHÂN / THÂN NHÂN</strong></p>
+        <small>(Ký và ghi rõ họ tên)</small>
+      </div>
+      <div class="sig-col">
+        <p>TP. Hồ Chí Minh, Ngày 06 Tháng 11 Năm 2026</p>
+        <p><strong>BÁC SĨ ĐIỀU TRỊ</strong></p>
+        <div class="sig-space">
+          <span class="digital-seal">HUIT HOSPITAL - ĐÃ KÝ SỐ</span>
+        </div>
+        <p><strong>BS. Vũ Thế Quang</strong></p>
+        <small>Khoa Nội Thận - Thận Nhân Tạo (HUIT Hospital)</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
